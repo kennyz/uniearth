@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>UniEarth · Interactive world map</title>
+<meta name="theme-color" content="#050a18">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=3">
+<link rel="stylesheet" href="theme.css?v=1">
+<link rel="stylesheet" href="styles.css?v=5">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <a class="brand" href="index.html" id="home-link" aria-label="UniEarth home"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="15"></circle><ellipse cx="20" cy="20" rx="6.5" ry="15"></ellipse><path d="M6 15h28M6 25h28"></path><path class="brand-orbit" d="M3 27C10 36 30 35 37 12"></path></svg><span>Uni<span class="brand-earth">Earth</span></span></a>
+
+    <div class="seg language-switch" id="language-switch" role="group" aria-label="Interface language">
+      <button type="button" data-lang="zh" lang="en" aria-pressed="false">ZH</button>
+      <button type="button" data-lang="en" lang="en" class="on" aria-pressed="true">EN</button>
+    </div>
+
+    <div class="seg primary" id="mapmodes"></div>
+
+    <div class="search">
+      <span class="ico">🔍</span>
+      <input id="search" type="text" autocomplete="off" spellcheck="false"
+             placeholder="Search countries, provinces or states">
+      <div id="suggest" class="suggest"></div>
+    </div>
+
+    <div class="seg" id="modes"></div>
+    <div class="seg" id="projbtns"></div>
+
+    <div class="zoombar">
+      <button data-zoom="in" title="Zoom in">＋</button>
+      <button data-zoom="out" title="Zoom out">－</button>
+      <button data-zoom="reset" class="wide" title="Reset view">Reset</button>
+      <button data-zoom="full" id="fsbtn" class="fs" title="Fullscreen (F)" aria-label="Fullscreen">⛶</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="stage">
+      <svg id="map" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 520"></svg>
+      <div id="tooltip"></div>
+      <div id="legend"></div>
+      <div id="hint"><b>Hover</b> for details · <b>Click</b> to pin · <b>1/2/3</b> switch map · <b>/</b> search · <b>F</b> fullscreen</div>
+    </div>
+    <aside id="panel"></aside>
+  </main>
+</div>
+<script src="data.js"></script>
+<script src="data-sub.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
