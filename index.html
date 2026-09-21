@@ -7,9 +7,10 @@
   <title>UniEarth — A new way to explore our planet.</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=3">
   <link rel="stylesheet" href="theme.css?v=1">
-  <link rel="stylesheet" href="home.css?v=7">
+  <link rel="stylesheet" href="home.css?v=9">
   <script src="i18n.js?v=3" defer=""></script>
   <script src="home.js?v=7" defer=""></script>
+  <script src="home-globe.js?v=1" defer=""></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-copy="skip">Skip to content</a>
@@ -26,17 +27,16 @@
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="status-dot"></span> <span data-copy="heroEyebrow">ONE PLANET. ENDLESS PERSPECTIVES.</span></p>
           <h1 id="hero-title" aria-label="UniEarth — A new way to explore our planet." data-label="heroLabel"><span data-copy="heroLine1">A new way to</span><br><span data-copy="heroLine2">explore</span><br><span class="hero-highlight" data-copy="heroLine3">our planet.</span></h1>
           <p class="hero-tagline" data-copy="tagline">One map. Rediscover our Earth.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="map.html" data-map-link=""><span data-copy="start">Start exploring</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"></path></svg></a>
-            <a class="text-link" href="#discover"><span data-copy="viewFeatures">View key features</span><span aria-hidden="true">↓</span></a>
           </div>
           <p class="access-note"><span aria-hidden="true">◎</span><span data-copy="access">No sign-up. Just open and explore.</span></p>
         </div>
         <div class="planet-scene">
-          <img class="planet" src="assets/earth.svg?v=3" alt="Earth centered on Asia, showing real continental outlines and a geographic grid" data-alt="earthAlt" width="840" height="840" fetchpriority="high">
+          <img class="planet-decor" src="assets/earth.svg?v=3" alt="" width="840" height="840" fetchpriority="high" aria-hidden="true">
+          <canvas class="planet planet-globe" width="840" height="840" role="img" aria-label="Earth centered on Asia, showing real continental outlines and a geographic grid" data-label="earthAlt"></canvas>
           <div class="planet-caption"><span class="crosshair" aria-hidden="true">+</span><div><span class="mono" data-copy="planetLabel">OUR SHARED HOME</span><p data-copy="planetCaption">All our differences. One shared planet.</p></div></div>
           <span class="planet-index mono" aria-hidden="true" data-copy="planetIndex">01 — EARTH</span>
         </div>
