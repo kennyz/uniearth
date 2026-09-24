@@ -317,10 +317,26 @@ function run() {
   check('搜索框内输入 f 不触发全屏', !doc.fullscreenElement);
   searchBox.blur();
 
-  // 13. 品牌副标题已移除
+  // 13. R 重置视图，输入框内不触发
+  w.__worldMap.view.k = 4; w.__worldMap.view.x = -320; w.__worldMap.view.y = -180;
+  w.__worldMap.applyView();
+  doc.body.focus();
+  doc.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'r', bubbles: true }));
+  check('按 R 重置为初始视图', w.__worldMap.view.k === 1 && w.__worldMap.view.x === 0 && w.__worldMap.view.y === 0,
+    JSON.stringify(w.__worldMap.view));
+  w.__worldMap.view.k = 3; w.__worldMap.view.x = -200; w.__worldMap.view.y = -100;
+  w.__worldMap.applyView();
+  searchBox.focus();
+  doc.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'r', bubbles: true }));
+  check('搜索框内输入 r 不重置视图', w.__worldMap.view.k === 3 && w.__worldMap.view.x === -200 && w.__worldMap.view.y === -100,
+    JSON.stringify(w.__worldMap.view));
+  searchBox.blur();
+  doc.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'R', bubbles: true }));
+
+  // 14. 品牌副标题已移除
   check('LOGO 右侧无副标题', !$('.brand .sub'), $('.brand').textContent.trim());
 
-  // 14. 三种地图模式
+  // 15. 三种地图模式
   const WM = w.__worldMap;
   check('共有三个地图模式', Object.keys(WM.modes).join(',') === 'world,cn,us', Object.keys(WM.modes).join(','));
   check('模式切换器有三个按钮', $$('#mapmodes button').length === 3,

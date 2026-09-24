@@ -29,6 +29,7 @@ async function load(target, query = '', saved = null, blocked = false) {
     const $ = selector => d.querySelector(selector);
     const click = selector => $(selector).click();
     check(d.documentElement.lang === 'en', 'English is the default');
+    check(d.querySelector('[data-lang]').dataset.lang === 'en', 'English language option is first');
     click('[data-lang="zh"]');
     map.select('156');
     map.view.k = 3; map.view.x = -500; map.view.y = -200; map.applyView();

@@ -1273,6 +1273,9 @@
     } else if ((e.key === 'f' || e.key === 'F') && !typing && !e.metaKey && !e.ctrlKey) {
       e.preventDefault();
       toggleFullscreen();
+    } else if ((e.key === 'r' || e.key === 'R') && !typing && !e.metaKey && !e.ctrlKey) {
+      e.preventDefault();
+      resetView();
     } else if (!typing && (e.key === '1' || e.key === '2' || e.key === '3')) {
       var m = { '1': 'world', '2': 'cn', '3': 'us' }[e.key];
       if (MODES[m] && (m === 'world' || MODES[m].pack) && m !== mapMode) {
@@ -1387,7 +1390,7 @@
     });
     document.getElementById('hint').innerHTML = '<b>' + t('悬停') + '</b> ' + t('查看信息') +
       ' · <b>' + t('点击') + '</b> ' + t('固定') + ' · <b>1/2/3</b> ' + t('切换地图') +
-      ' · <b>/</b> ' + t('搜索') + ' · <b>F</b> ' + t('全屏');
+      ' · <b>R</b> ' + t('重置') + ' · <b>/</b> ' + t('搜索') + ' · <b>F</b> ' + t('全屏');
     syncFsBtn();
   }
   function setLanguage(next) {
