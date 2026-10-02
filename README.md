@@ -4,7 +4,7 @@
 
 [Explore UniEarth](https://uniearth.org/) · [Open the interactive map](https://uniearth.org/map.html)
 
-[![UniEarth interactive world map preview](https://uniearth.org/assets/social-preview.png)](https://uniearth.org/)
+[![UniEarth interactive world map screenshot](assets/github-map-preview.png)](https://uniearth.org/map.html)
 
 UniEarth is a free, browser-based interactive atlas for exploring the world through geography and public data. Move from a global view to Chinese provinces and US states, compare places through population and economic indicators, and inspect detailed information without creating an account.
 
