@@ -1,41 +1,193 @@
 # UniEarth
 
-**UniEarth — A new way to explore our planet.**  
-一张地图，重新认识我们的地球。
+**A new way to explore our planet.**
 
-## 页面
+[Explore UniEarth](https://uniearth.org/) · [Open the interactive map](https://uniearth.org/map.html)
 
-- `index.html`：品牌首页，包含关键指标、核心特征、中英文切换与地图入口。
-- `map.html`：交互地图的多文件入口，覆盖世界、中国省级和美国州级地图。
-- `world-map.html`：可直接离线打开的单文件地图版本。
+[![UniEarth interactive world map preview](https://uniearth.org/assets/social-preview.png)](https://uniearth.org/)
 
-默认使用英语；手动切换后记住语言偏好。首页每次只显示一种语言，地图地名不再并列显示双语。也支持 `?lang=zh` / `?lang=en`。地图品牌标志可返回首页。两种语言下均可搜索中英文地名和国家 ISO 代码。
+UniEarth is a free, browser-based interactive atlas for exploring the world through geography and public data. Move from a global view to Chinese provinces and US states, compare places through population and economic indicators, and inspect detailed information without creating an account.
 
-## 开发
+The project is a static web application built with vanilla JavaScript, SVG and WebGL. Map data is stored in the repository, so the online map does not depend on external map tiles or a third-party map service.
 
-运行 `python3 -m http.server 8765 --bind 127.0.0.1`，在浏览器打开 `http://127.0.0.1:8765/`。
+## Highlights
 
-修改地图源文件后运行 `python3 make_single.py` 更新单文件版本；首页使用独立的 `home.css` 和 `home.js`；首页与地图共用 `theme.css` 中的品牌 Logo 样式和深空蓝色板。
+- **241 countries and territories** rendered from Natural Earth 1:50m boundaries.
+- **85 provincial and state regions** across China and the United States.
+- **Five data views**: population, area, population density, total GDP and GDP per capita.
+- **Three projections**: Equal Earth, Web Mercator and Equirectangular.
+- **Interactive discovery** through search, pan, zoom, hover details, pinned selections, rankings and neighboring-country navigation.
+- **English and Simplified Chinese UI** with localized labels, place names, units, currencies and search.
+- **Offline-ready map** distributed as a self-contained `world-map.html` file.
+- **No account, ads or external map API required.**
 
-首页动态地球由 `home-globe.js` 将 Natural Earth 50m 国界数据映射到 WebGL 球面；`assets/earth.svg` 是基于 Natural Earth 110m 数据生成的静态后备，可用 `python3 build_home_globe.py` 重新生成。两种实现均使用仓库内数据，无需外部地图服务。
+## Map coverage
 
-验证：`node dev-i18n.js` 检查地图语言切换及离线版本，`node dev-smoke.js` 检查地图交互。测试依赖 jsdom，可通过 `JSDOM_PATH` 指定其安装路径。
+| Level | Coverage | Available information |
+| --- | --- | --- |
+| World | Countries and territories | Capital, region, population, area, density, GDP, GDP per capita, languages, currencies, coordinates and land borders |
+| China | Provincial-level divisions | Population, area, density, administrative center and national share |
+| United States | States and Washington, D.C. | Population, area, density, capital and national share |
 
-## SEO
+Color scales and top-ten rankings update with the selected geography and metric. Missing values remain visibly unavailable rather than being treated as zero.
 
-正式地址为 `https://uniearth.org/`，统一配置在 `seo-config.json`。首页与地图页包含独立的标题、描述、Open Graph / Twitter 分享卡片和 JSON-LD；中英文切换会同步元信息。分享图片为 `assets/social-preview.png`（1200 × 630）。
+## Interaction and shortcuts
 
-修改 SEO 配置后运行：
+| Input | Action |
+| --- | --- |
+| Search box | Find countries, Chinese provinces or US states in English or Chinese; country ISO codes are also supported |
+| Mouse wheel or trackpad | Zoom the map |
+| Drag | Pan the map |
+| Hover | Preview geographic details |
+| Click | Pin a place and open its full data panel |
+| `1` / `2` / `3` | Switch between World, China and USA maps |
+| `/` | Focus search |
+| `R` | Reset the current map view |
+| `F` | Enter or exit fullscreen |
+| `Esc` | Clear the current selection |
+
+## Pages and entry points
+
+| File | Purpose |
+| --- | --- |
+| `index.html` | Product homepage, rotating WebGL globe, feature overview and map entry points |
+| `map.html` | Main multi-file interactive map |
+| `world-map.html` | Generated standalone map with styles, scripts and data inlined for offline use |
+
+The interface defaults to English. A selected language is stored locally and can also be set with `?lang=en` or `?lang=zh`. Language switching preserves map mode, metric, zoom, selection, search context and URL state.
+
+## Quick start
+
+No application server or build step is required for normal local use. Start any static HTTP server from the repository root:
+
+```sh
+python3 -m http.server 8765 --bind 127.0.0.1
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8765/
+```
+
+Opening files directly also works for the standalone map:
+
+```text
+world-map.html
+```
+
+## Architecture
+
+- `app.js` contains map projection, rendering, interaction, search, ranking and data-panel logic.
+- `i18n.js` contains shared map translations and localized formatting helpers.
+- `home.js` localizes the homepage and keeps language state aligned with the map.
+- `home-globe.js` maps Natural Earth 1:50m geometry onto the animated WebGL globe.
+- `data.js` contains world geography metadata and statistical values.
+- `data-sub.js` contains China provincial and US state geometry and metadata.
+- `theme.css`, `home.css` and `styles.css` provide the shared design system and page-specific layouts.
+- `assets/earth.svg` is the static homepage globe fallback generated from Natural Earth 1:110m data.
+
+## Data sources
+
+| Data | Source |
+| --- | --- |
+| World boundaries | Natural Earth 1:50m via `world-atlas` |
+| Country metadata | `world-countries` / `mledoze` |
+| Country population and GDP | World Bank Open Data |
+| China provincial boundaries | Alibaba Cloud DataV |
+| US state boundaries | `us-atlas` `states-10m` |
+| Provincial and state statistics | Wikidata; observation years vary by region |
+
+Source information is also shown inside the map. The repository keeps the processed datasets locally so the interface remains fast and deterministic.
+
+## Rebuilding generated assets
+
+Regenerate the standalone offline map after changing map source files:
+
+```sh
+python3 make_single.py
+```
+
+Regenerate the homepage globe fallback:
+
+```sh
+python3 build_home_globe.py
+```
+
+The source-data builders are:
+
+```sh
+python3 build.py
+python3 build_sub.py
+```
+
+These builders may require their documented upstream input files and network access. Generated runtime data is already committed, so they are not required for normal development.
+
+## Verification
+
+The repository includes focused regression scripts:
+
+```sh
+node dev-i18n.js
+node dev-smoke.js
+node dev-seo.js
+```
+
+The tests use `jsdom`. If it is installed outside the repository, point the scripts to it with `JSDOM_PATH`:
+
+```sh
+JSDOM_PATH=/path/to/node_modules/jsdom node dev-i18n.js
+```
+
+Useful syntax and generated-file checks:
+
+```sh
+node --check app.js
+node --check home.js
+node --check home-globe.js
+git diff --check
+```
+
+## SEO and social sharing
+
+The production URL is configured in `seo-config.json` and currently points to `https://uniearth.org/`. The homepage and map have separate titles, descriptions, canonical URLs, Open Graph metadata, Twitter cards and JSON-LD. Language switching also updates visible metadata at runtime.
+
+Regenerate SEO blocks and the standalone map after changing SEO configuration:
 
 ```sh
 python3 build_seo.py
 python3 make_single.py
 ```
 
-换域名时运行 `python3 build_seo.py --site-url https://新域名/`，再重新生成离线地图。站点也可部署到子路径；爬虫读取的 `robots.txt` 仍需放在域名根目录。生成器不填写猜测的域名，也不伪造更新时间、评分或流量数据。
+For a new domain:
 
-`sitemap.xml` 只列出首页与在线地图；`index.html`、地图参数和 `world-map.html` 通过 canonical 合并到相应主页面。不要在 robots.txt 中屏蔽离线地图或脚本，否则搜索引擎无法读取 canonical 或渲染页面。地图语言仍在同一 URL 上动态切换，本次未添加独立语言页面或 hreflang。
+```sh
+python3 build_seo.py --site-url https://example.com/
+python3 make_single.py
+```
 
-部署时包含 `seo.js`、`robots.txt`、`sitemap.xml` 和分享图片。上线后检查这些地址均返回正常内容，并在 Google Search Console / Bing Webmaster Tools 中提交 `https://uniearth.org/sitemap.xml`；用 URL 检查确认规范页面和渲染内容。收录、排名及 Core Web Vitals 需要在正式部署后验证。
+The social preview is `assets/social-preview.png` at 1200 × 630 pixels. Regenerate it with:
 
-分享图片可运行 `python3 build_social_preview.py` 重新生成，需要 Pillow 与 Arial（macOS）或 DejaVu Sans（Linux）字体。SEO 验证运行 `node dev-seo.js`，同样通过 `JSDOM_PATH` 指定 jsdom 路径。
+```sh
+python3 build_social_preview.py
+```
+
+The image builder requires Pillow and uses Arial on macOS or DejaVu Sans on Linux.
+
+## Deployment checklist
+
+Deploy the repository as a static site and include:
+
+- `seo.js`
+- `robots.txt`
+- `sitemap.xml`
+- `assets/social-preview.png`
+
+After deployment:
+
+1. Verify that the homepage, map, sitemap, robots file and social image return successful responses.
+2. Submit `https://uniearth.org/sitemap.xml` to Google Search Console and Bing Webmaster Tools.
+3. Use each search engine's URL inspection tools to confirm canonical URLs and rendered content.
+4. Monitor indexing, search performance and Core Web Vitals after the site has been crawled.
+
+The sitemap lists only the homepage and online map. Parameterized map URLs and `world-map.html` use canonical URLs to consolidate indexing signals. Do not block the offline map or its scripts in `robots.txt`, because crawlers still need to read the canonical metadata.
