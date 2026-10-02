@@ -2,12 +2,84 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>UniEarth · Interactive world map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World Map — Population, Area &amp; GDP | UniEarth</title>
+<meta name="description" content="Search countries, Chinese provinces and US states on an interactive world map. Compare population, area, density, GDP and GDP per capita with UniEarth.">
+<!-- SEO:START -->
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UniEarth">
+<meta property="og:title" content="World Map — Population, Area &amp; GDP | UniEarth">
+<meta property="og:description" content="Search countries, Chinese provinces and US states on an interactive world map. Compare population, area, density, GDP and GDP per capita with UniEarth.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="World Map — Population, Area &amp; GDP | UniEarth">
+<meta name="twitter:description" content="Search countries, Chinese provinces and US states on an interactive world map. Compare population, area, density, GDP and GDP per capita with UniEarth.">
+<meta property="og:image" content="https://uniearth.org/assets/social-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="UniEarth interactive world map and geography data">
+<meta name="twitter:image" content="https://uniearth.org/assets/social-preview.png">
+<meta name="twitter:image:alt" content="UniEarth interactive world map and geography data">
+<link rel="canonical" href="https://uniearth.org/map.html">
+<meta property="og:url" content="https://uniearth.org/map.html">
+<script type="application/ld+json" id="seo-structured-data">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://uniearth.org/#website",
+      "url": "https://uniearth.org/",
+      "name": "UniEarth",
+      "inLanguage": [
+        "en",
+        "zh-CN"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://uniearth.org/map.html#webpage",
+      "url": "https://uniearth.org/map.html",
+      "name": "World Map — Population, Area & GDP | UniEarth",
+      "description": "Search countries, Chinese provinces and US states on an interactive world map. Compare population, area, density, GDP and GDP per capita with UniEarth.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://uniearth.org/#website"
+      },
+      "image": "https://uniearth.org/assets/social-preview.png",
+      "mainEntity": {
+        "@id": "https://uniearth.org/map.html#app"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://uniearth.org/map.html#app",
+      "url": "https://uniearth.org/map.html",
+      "name": "World Map — Population, Area & GDP | UniEarth",
+      "description": "Search countries, Chinese provinces and US states on an interactive world map. Compare population, area, density, GDP and GDP per capita with UniEarth.",
+      "inLanguage": "en",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "featureList": [
+        "World, China province and US state maps",
+        "Bilingual place search",
+        "Population, area, density and GDP comparison",
+        "Multiple map projections"
+      ]
+    }
+  ]
+}
+</script>
+<!-- SEO:END -->
 <meta name="theme-color" content="#050a18">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=3">
 <link rel="stylesheet" href="theme.css?v=1">
-<link rel="stylesheet" href="styles.css?v=5">
+<link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 <div id="app">
@@ -39,7 +111,12 @@
     </div>
   </header>
 
-  <main>
+  <main aria-labelledby="map-title">
+    <section class="visually-hidden" aria-labelledby="map-title">
+      <h1 id="map-title">Interactive world map</h1>
+      <p id="map-summary">Search countries, Chinese provinces and US states on an interactive world map. Compare population, area, density, GDP and GDP per capita with UniEarth.</p>
+    </section>
+    <noscript><div class="no-script"><p>This interactive map needs JavaScript. Enable JavaScript to search, zoom and compare geographic data.</p><p>交互地图需要 JavaScript，请启用后搜索地点、缩放地图和比较地理数据。</p><a href="index.html">About UniEarth / 了解 UniEarth</a></div></noscript>
     <div id="stage">
       <svg id="map" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 520"></svg>
       <div id="tooltip"></div>
@@ -52,6 +129,7 @@
 <script src="data.js"></script>
 <script src="data-sub.js"></script>
 <script src="i18n.js"></script>
+<script src="seo.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

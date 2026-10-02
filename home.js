@@ -7,7 +7,7 @@
   "language": "Interface language",
   "metrics": "Product metrics",
   "openMap": "Open map",
-  "tagline": "One map. Rediscover our Earth.",
+  "tagline": "Explore geography and data on an interactive world map.",
   "start": "Start exploring",
   "viewFeatures": "View key features",
   "access": "No sign-up. Just open and explore.",
@@ -43,7 +43,7 @@
   "skip": "跳至主要内容",
   "language": "界面语言",
   "openMap": "打开地图",
-  "tagline": "用全新的方式，探索共同的家园。",
+  "tagline": "用交互式世界地图，探索地理与数据。",
   "start": "开始探索",
   "viewFeatures": "查看关键特性",
   "access": "无需注册，在浏览器中即刻探索",
@@ -77,10 +77,9 @@
   "discoverEyebrow": "01 / 关键特性"
 };
   var nodes = document.querySelectorAll('[data-copy], [data-label], [data-alt]');
-  var description = document.querySelector('meta[name="description"]');
   function render() {
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
-    document.title = language === 'en' ? english.heroLabel : chinese.heroLabel;
+    window.UNIEARTH_SEO.update('home', language);
     nodes.forEach(function (node) {
       var key = node.dataset.copy || node.dataset.label || node.dataset.alt;
       var value = language === 'en' ? (english[key] || chinese[key]) : chinese[key];
@@ -99,9 +98,6 @@
       // Relative links keep the page usable when opened directly from disk.
       link.setAttribute('href', url.pathname.split('/').pop() + url.search + url.hash);
     });
-    description.content = language === 'en'
-      ? 'UniEarth — A new way to explore our planet. Discover geography and public data. Make knowledge more accessible and our world easier to understand.'
-      : 'UniEarth — 一张地图，重新认识我们的地球。探索地理与公开数据，让知识更易获取，让世界更易理解。';
   }
   document.querySelector('.language-switch').addEventListener('click', function (event) {
     var button = event.target.closest('[data-lang]');

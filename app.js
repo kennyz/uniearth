@@ -1365,7 +1365,7 @@
   }
   function syncLanguageUI() {
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
-    document.title = 'UniEarth · ' + t('交互式世界地图');
+    window.UNIEARTH_SEO.update('map', language);
     var homeLink = document.getElementById('home-link');
     if (homeLink) {
       homeLink.href = 'index.html?lang=' + language;
